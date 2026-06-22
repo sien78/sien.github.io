@@ -1,5 +1,5 @@
-/* SIEN - 파도 스윕 페이지 전환 효과 */
-.wave-transition {
+/* SIEN - 대각선 파도 물보라 페이지 전환 */
+.sea-transition {
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -10,209 +10,192 @@
   --y: 50vh;
 }
 
-/* 클릭 위치에서 생기는 작은 물결 */
-.wave-ripple {
+/* 클릭 위치에서 생기는 하얀 물보라 선 */
+.foam-splash {
   position: absolute;
   left: var(--x);
   top: var(--y);
-
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-
-  border: 2px solid rgba(255, 255, 255, 0.95);
-  box-shadow:
-    0 0 18px rgba(255, 255, 255, 0.85),
-    0 0 34px rgba(49, 191, 255, 0.75);
-
-  transform: translate(-50%, -50%) scale(0.25);
+  width: 240px;
+  height: 120px;
+  transform: translate(-50%, -50%) rotate(-14deg);
   opacity: 0;
-
-  animation: ripplePop 0.42s ease-out forwards;
+  animation: foamSplash 0.42s ease-out forwards;
 }
 
-.wave-ripple.second {
-  width: 58px;
-  height: 58px;
-  border-color: rgba(150, 235, 255, 0.75);
+.foam-splash svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.foam-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.95);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  filter:
+    drop-shadow(0 0 8px rgba(255,255,255,0.85))
+    drop-shadow(0 0 16px rgba(49,191,255,0.55));
+  animation: drawFoam 0.34s ease-out forwards;
+}
+
+.foam-line.thin {
+  stroke: rgba(190, 245, 255, 0.72);
+  stroke-width: 3;
   animation-delay: 0.04s;
 }
 
-.wave-ripple.third {
-  width: 88px;
-  height: 88px;
-  border-color: rgba(49, 191, 255, 0.45);
-  animation-delay: 0.08s;
-}
-
-/* 화면을 쓸고 지나가는 파도 */
-.ocean-wave {
+/* 대각선으로 지나가는 파란 곡선 물결 */
+.diagonal-wave {
   position: absolute;
-  top: 0;
-  width: 140vw;
-  height: 100vh;
+  width: 170vw;
+  height: 150vh;
+  top: -25vh;
 }
 
-.ocean-wave svg {
+.diagonal-wave svg {
   width: 100%;
   height: 100%;
   display: block;
 }
 
-/* 오른쪽 메뉴에서 클릭하면 오른쪽에서 왼쪽으로 */
-.wave-transition.from-right .ocean-wave {
-  right: -22vw;
-  transform: translateX(105%);
-  animation: waveFromRight 0.46s cubic-bezier(0.75, 0, 0.2, 1) forwards;
+.sea-transition.from-right .diagonal-wave {
+  right: -58vw;
+  transform: translateX(100%) rotate(-13deg);
+  animation: waveSweepRight 0.52s cubic-bezier(0.75, 0, 0.2, 1) forwards;
 }
 
-/* 왼쪽 영역에서 클릭하면 왼쪽에서 오른쪽으로 */
-.wave-transition.from-left .ocean-wave {
-  left: -22vw;
-  transform: translateX(-105%);
-  animation: waveFromLeft 0.46s cubic-bezier(0.75, 0, 0.2, 1) forwards;
+.sea-transition.from-left .diagonal-wave {
+  left: -58vw;
+  transform: translateX(-100%) rotate(13deg);
+  animation: waveSweepLeft 0.52s cubic-bezier(0.75, 0, 0.2, 1) forwards;
 }
 
-/* 파도 위 흰 물결선 */
-.wave-foam {
+/* 파도 안쪽 하이라이트 선 */
+.wave-highlight {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.85);
+  stroke: rgba(255, 255, 255, 0.8);
   stroke-width: 5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 70 28;
-  opacity: 0.9;
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.6));
-  animation: foamFlow 0.46s ease-out forwards;
+  stroke-dasharray: 90 36;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.55));
+  animation: highlightFlow 0.5s ease-out forwards;
 }
 
-.wave-foam.soft {
-  stroke: rgba(190, 245, 255, 0.55);
+.wave-highlight.soft {
+  stroke: rgba(190, 245, 255, 0.5);
   stroke-width: 3;
-  stroke-dasharray: 48 34;
-  opacity: 0.65;
+  stroke-dasharray: 52 30;
 }
 
-/* 파도와 같이 튀는 작은 물방울 */
-.wave-droplet {
+/* 작게 튀는 물보라 방울 */
+.sea-droplet {
   position: absolute;
-  top: var(--top);
+  left: var(--x);
+  top: var(--y);
 
   width: var(--size);
   height: var(--size);
-
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.86);
 
   background:
     radial-gradient(
       circle at 30% 30%,
-      rgba(255,255,255,0.95),
-      rgba(175,240,255,0.45) 42%,
+      rgba(255,255,255,0.98),
+      rgba(180,240,255,0.54) 42%,
       rgba(49,191,255,0.12) 72%
     );
 
+  border: 1px solid rgba(255,255,255,0.78);
   box-shadow:
-    0 0 10px rgba(255,255,255,0.55),
-    0 0 18px rgba(49,191,255,0.36);
+    0 0 8px rgba(255,255,255,0.6),
+    0 0 15px rgba(49,191,255,0.42);
 
   opacity: 0;
-  animation-duration: 0.42s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
+  animation: dropletSplash 0.42s ease-out forwards;
   animation-delay: var(--delay);
 }
 
-.wave-transition.from-right .wave-droplet {
-  right: -30px;
-  animation-name: dropletFromRight;
-}
-
-.wave-transition.from-left .wave-droplet {
-  left: -30px;
-  animation-name: dropletFromLeft;
-}
-
-@keyframes ripplePop {
+@keyframes foamSplash {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.25);
+    transform: translate(-50%, -50%) rotate(-14deg) scale(0.72);
   }
 
-  25% {
+  18% {
     opacity: 1;
   }
 
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(2.2);
+    transform: translate(-50%, -50%) rotate(-14deg) scale(1.12);
   }
 }
 
-@keyframes waveFromRight {
+@keyframes drawFoam {
   0% {
-    transform: translateX(105%);
+    stroke-dashoffset: 260;
   }
 
   100% {
-    transform: translateX(-10%);
+    stroke-dashoffset: 0;
   }
 }
 
-@keyframes waveFromLeft {
+@keyframes waveSweepRight {
   0% {
-    transform: translateX(-105%);
+    transform: translateX(100%) rotate(-13deg);
   }
 
   100% {
-    transform: translateX(10%);
+    transform: translateX(-22%) rotate(-13deg);
   }
 }
 
-@keyframes foamFlow {
+@keyframes waveSweepLeft {
   0% {
-    stroke-dashoffset: 120;
+    transform: translateX(-100%) rotate(13deg);
+  }
+
+  100% {
+    transform: translateX(22%) rotate(13deg);
+  }
+}
+
+@keyframes highlightFlow {
+  0% {
+    stroke-dashoffset: 130;
     opacity: 0;
   }
 
-  25% {
+  20% {
     opacity: 1;
   }
 
   100% {
     stroke-dashoffset: 0;
-    opacity: 0.75;
+    opacity: 0.72;
   }
 }
 
-@keyframes dropletFromRight {
+@keyframes dropletSplash {
   0% {
     opacity: 0;
-    transform: translateX(0) translateY(0) scale(0.5);
+    transform: translate(0, 0) scale(0.4);
   }
 
-  20% {
+  22% {
     opacity: 1;
   }
 
   100% {
     opacity: 0;
-    transform: translateX(-220px) translateY(var(--float-y)) scale(1.15);
-  }
-}
-
-@keyframes dropletFromLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(0) translateY(0) scale(0.5);
-  }
-
-  20% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateX(220px) translateY(var(--float-y)) scale(1.15);
+    transform:
+      translate(var(--move-x), var(--move-y))
+      scale(1.05);
   }
 }
