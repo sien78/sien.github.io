@@ -15,156 +15,189 @@ function isInternalPageLink(link) {
   return url.origin === window.location.origin;
 }
 
-function getDiagonalWaveSvg(direction) {
+function getWhaleWakeSvg(direction) {
   if (direction === "from-right") {
     return `
-      <svg viewBox="0 0 1400 900" preserveAspectRatio="none" aria-hidden="true">
+      <svg viewBox="0 0 1500 950" preserveAspectRatio="none" aria-hidden="true">
         <defs>
-          <linearGradient id="sienWaveRight" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.94" />
-            <stop offset="14%" stop-color="#bdf4ff" stop-opacity="0.98" />
-            <stop offset="42%" stop-color="#31bfff" stop-opacity="0.98" />
-            <stop offset="72%" stop-color="#0065d8" stop-opacity="0.98" />
+          <linearGradient id="whaleWakeRight" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96" />
+            <stop offset="10%" stop-color="#d9fbff" stop-opacity="0.98" />
+            <stop offset="26%" stop-color="#7fe6ff" stop-opacity="0.98" />
+            <stop offset="48%" stop-color="#31bfff" stop-opacity="0.98" />
+            <stop offset="74%" stop-color="#0065d8" stop-opacity="0.98" />
             <stop offset="100%" stop-color="#020b24" stop-opacity="1" />
           </linearGradient>
         </defs>
 
         <path
-          d="M1400 0
-             H430
-             C260 95 540 210 360 330
-             C130 485 585 610 330 760
-             C250 810 215 860 230 900
-             H1400 Z"
-          fill="url(#sienWaveRight)"
+          d="M1500 -50
+             H520
+             C345 70 725 190 455 350
+             C210 495 790 640 405 820
+             C330 855 305 910 350 980
+             H1500 Z"
+          fill="url(#whaleWakeRight)"
         />
 
         <path
-          class="wave-highlight"
-          d="M430 0
-             C260 95 540 210 360 330
-             C130 485 585 610 330 760
-             C250 810 215 860 230 900"
+          class="wake-foam-edge"
+          d="M520 -50
+             C345 70 725 190 455 350
+             C210 495 790 640 405 820
+             C330 855 305 910 350 980"
         />
 
         <path
-          class="wave-highlight soft"
-          d="M545 0
-             C390 105 650 230 480 350
-             C295 485 710 625 470 770
-             C400 815 370 862 385 900"
+          class="wake-foam-inner"
+          d="M635 -50
+             C490 85 835 205 575 365
+             C360 498 890 650 535 825
+             C475 860 455 920 495 980"
+        />
+
+        <path
+          class="wake-foam-inner"
+          d="M770 -50
+             C630 95 950 220 705 380
+             C520 505 1000 660 665 830
+             C610 865 595 920 630 980"
         />
       </svg>
     `;
   }
 
   return `
-    <svg viewBox="0 0 1400 900" preserveAspectRatio="none" aria-hidden="true">
+    <svg viewBox="0 0 1500 950" preserveAspectRatio="none" aria-hidden="true">
       <defs>
-        <linearGradient id="sienWaveLeft" x1="100%" y1="0%" x2="0%" y2="0%">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.94" />
-          <stop offset="14%" stop-color="#bdf4ff" stop-opacity="0.98" />
-          <stop offset="42%" stop-color="#31bfff" stop-opacity="0.98" />
-          <stop offset="72%" stop-color="#0065d8" stop-opacity="0.98" />
+        <linearGradient id="whaleWakeLeft" x1="100%" y1="0%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96" />
+          <stop offset="10%" stop-color="#d9fbff" stop-opacity="0.98" />
+          <stop offset="26%" stop-color="#7fe6ff" stop-opacity="0.98" />
+          <stop offset="48%" stop-color="#31bfff" stop-opacity="0.98" />
+          <stop offset="74%" stop-color="#0065d8" stop-opacity="0.98" />
           <stop offset="100%" stop-color="#020b24" stop-opacity="1" />
         </linearGradient>
       </defs>
 
       <path
-        d="M0 0
-           H970
-           C1140 95 860 210 1040 330
-           C1270 485 815 610 1070 760
-           C1150 810 1185 860 1170 900
+        d="M0 -50
+           H980
+           C1155 70 775 190 1045 350
+           C1290 495 710 640 1095 820
+           C1170 855 1195 910 1150 980
            H0 Z"
-        fill="url(#sienWaveLeft)"
+        fill="url(#whaleWakeLeft)"
       />
 
       <path
-        class="wave-highlight"
-        d="M970 0
-           C1140 95 860 210 1040 330
-           C1270 485 815 610 1070 760
-           C1150 810 1185 860 1170 900"
+        class="wake-foam-edge"
+        d="M980 -50
+           C1155 70 775 190 1045 350
+           C1290 495 710 640 1095 820
+           C1170 855 1195 910 1150 980"
       />
 
       <path
-        class="wave-highlight soft"
-        d="M855 0
-           C1010 105 750 230 920 350
-           C1105 485 690 625 930 770
-           C1000 815 1030 862 1015 900"
+        class="wake-foam-inner"
+        d="M865 -50
+           C1010 85 665 205 925 365
+           C1140 498 610 650 965 825
+           C1025 860 1045 920 1005 980"
+      />
+
+      <path
+        class="wake-foam-inner"
+        d="M730 -50
+           C870 95 550 220 795 380
+           C980 505 500 660 835 830
+           C890 865 905 920 870 980"
       />
     </svg>
   `;
 }
 
-function createFoamSplash(x, y, transition) {
-  const foam = document.createElement("div");
-  foam.className = "foam-splash";
+function createTailSplash(transition) {
+  const splash = document.createElement("div");
+  splash.className = "tail-splash";
 
-  foam.innerHTML = `
-    <svg viewBox="0 0 240 120" aria-hidden="true">
+  splash.innerHTML = `
+    <svg viewBox="0 0 310 170" aria-hidden="true">
       <path
-        class="foam-line"
-        d="M10 70
-           C45 25 85 95 122 50
-           C155 12 185 80 230 35"
+        class="splash-line-main"
+        d="M18 112
+           C58 42 116 128 160 70
+           C196 22 236 34 292 76"
       />
+
       <path
-        class="foam-line thin"
-        d="M18 92
-           C58 62 82 118 126 78
-           C160 48 190 102 224 70"
+        class="splash-line-sub"
+        d="M28 134
+           C72 90 114 158 165 106
+           C202 70 242 92 286 116"
       />
+
+      <path
+        class="splash-line-sub"
+        d="M52 82
+           C92 48 120 72 148 42
+           C170 18 202 20 225 42"
+      />
+
+      <circle class="splash-dot d1" cx="85" cy="50" r="5" />
+      <circle class="splash-dot d2" cx="132" cy="34" r="4" />
+      <circle class="splash-dot d3" cx="205" cy="45" r="6" />
+      <circle class="splash-dot d4" cx="245" cy="70" r="4" />
     </svg>
   `;
 
-  transition.appendChild(foam);
+  transition.appendChild(splash);
 }
 
-function createDroplets(x, y, transition) {
-  const dropletCount = 10;
+function createSeaStreaks(transition, direction) {
+  const streakCount = 7;
 
-  for (let i = 0; i < dropletCount; i++) {
-    const droplet = document.createElement("span");
-    droplet.className = "sea-droplet";
+  for (let i = 0; i < streakCount; i++) {
+    const streak = document.createElement("span");
+    streak.className = "sea-streak";
 
-    const angle = -Math.PI / 4 + (Math.random() - 0.5) * Math.PI;
-    const distance = 50 + Math.random() * 130;
+    const baseAngle = direction === "from-right" ? -28 : 28;
+    const angle = baseAngle + (Math.random() - 0.5) * 24;
 
-    const moveX = Math.cos(angle) * distance;
-    const moveY = Math.sin(angle) * distance;
+    const length = 60 + Math.random() * 120;
+    const move =
+      direction === "from-right"
+        ? -(120 + Math.random() * 180)
+        : 120 + Math.random() * 180;
 
-    const size = 5 + Math.random() * 15;
-    const delay = Math.random() * 0.08;
+    const delay = Math.random() * 0.09;
 
-    droplet.style.setProperty("--size", `${size}px`);
-    droplet.style.setProperty("--move-x", `${moveX}px`);
-    droplet.style.setProperty("--move-y", `${moveY}px`);
-    droplet.style.setProperty("--delay", `${delay}s`);
+    streak.style.setProperty("--angle", `${angle}deg`);
+    streak.style.setProperty("--length", `${length}px`);
+    streak.style.setProperty("--move", `${move}px`);
+    streak.style.setProperty("--delay", `${delay}s`);
 
-    transition.appendChild(droplet);
+    transition.appendChild(streak);
   }
 }
 
-function createSeaTransition(x, y) {
+function createWhaleTransition(x, y) {
   const direction = x > window.innerWidth / 2 ? "from-right" : "from-left";
 
   const transition = document.createElement("div");
-  transition.className = `sea-transition ${direction}`;
+  transition.className = `whale-transition ${direction}`;
 
   transition.style.setProperty("--x", `${x}px`);
   transition.style.setProperty("--y", `${y}px`);
 
-  createFoamSplash(x, y, transition);
-  createDroplets(x, y, transition);
+  createTailSplash(transition);
+  createSeaStreaks(transition, direction);
 
-  const wave = document.createElement("div");
-  wave.className = "diagonal-wave";
-  wave.innerHTML = getDiagonalWaveSvg(direction);
+  const wake = document.createElement("div");
+  wake.className = "whale-wake";
+  wake.innerHTML = getWhaleWakeSvg(direction);
 
-  transition.appendChild(wave);
+  transition.appendChild(wake);
   document.body.appendChild(transition);
 }
 
@@ -184,9 +217,9 @@ document.addEventListener("click", function (event) {
   const x = rect.left + rect.width / 2;
   const y = rect.top + rect.height / 2;
 
-  createSeaTransition(x, y);
+  createWhaleTransition(x, y);
 
   setTimeout(() => {
     window.location.href = link.href;
-  }, 460);
+  }, 520);
 });
