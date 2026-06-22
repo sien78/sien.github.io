@@ -6,9 +6,9 @@
 
   <title>ABOUT | SIEN</title>
 
-  
   <link rel="stylesheet" href="transition.css" />
-<style>
+
+  <style>
     :root {
       --cyan: #31bfff;
       --blue: #0065d8;
@@ -42,10 +42,6 @@
       animation: pageEnter 0.55s ease forwards;
     }
 
-    body.is-leaving {
-      animation: pageLeave 0.35s ease forwards;
-    }
-
     a {
       text-decoration: none;
       color: inherit;
@@ -60,18 +56,6 @@
       to {
         opacity: 1;
         transform: translateY(0);
-      }
-    }
-
-    @keyframes pageLeave {
-      from {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      to {
-        opacity: 0;
-        transform: translateY(-18px);
       }
     }
 
@@ -157,7 +141,7 @@
     }
 
     .content {
-      width: min(1100px, 100%);
+      width: min(1120px, 100%);
     }
 
     .page-label {
@@ -170,7 +154,7 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(72px, 12vw, 180px);
+      font-size: clamp(72px, 12vw, 170px);
       line-height: 0.9;
       font-weight: 900;
       font-style: italic;
@@ -178,29 +162,129 @@
       color: var(--deep-blue);
     }
 
-    .content-card {
+    .profile-card {
       margin-top: 42px;
-      padding: 42px;
+      padding: 44px;
+
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 42px;
+      align-items: stretch;
 
       background: var(--card);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 14px;
-      box-shadow: 0 20px 50px rgba(3, 50, 112, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(3, 50, 112, 0.17);
       backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
     }
 
-    .content-card h2 {
-      margin: 0 0 18px;
+    .profile-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(49, 191, 255, 0.22), transparent 28%),
+        radial-gradient(circle at 92% 82%, rgba(0, 101, 216, 0.18), transparent 30%);
+      pointer-events: none;
+    }
+
+    .profile-image-box,
+    .profile-info {
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-image-box {
+      min-height: 460px;
+      border-radius: 18px;
+      border: 1px solid rgba(0, 101, 216, 0.18);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(213, 246, 255, 0.76)),
+        radial-gradient(circle at 50% 35%, rgba(49, 191, 255, 0.22), transparent 38%);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: inset 0 0 30px rgba(49, 191, 255, 0.13);
+    }
+
+    .profile-image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-placeholder {
+      text-align: center;
+      color: rgba(6, 27, 74, 0.38);
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .image-placeholder strong {
+      display: block;
+      margin-bottom: 12px;
       font-size: 28px;
-      color: var(--blue);
+      color: rgba(0, 101, 216, 0.48);
     }
 
-    .content-card p {
-      margin: 0;
-      max-width: 760px;
-      font-size: 18px;
-      line-height: 1.8;
-      font-weight: 600;
+    .image-placeholder span {
+      font-size: 13px;
+    }
+
+    .profile-info {
+      padding: 12px 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .profile-title {
+      margin: 0 0 28px;
+      color: var(--blue);
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .profile-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .profile-row {
+      min-height: 62px;
+      padding: 0 0 16px;
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .profile-row:last-child {
+      border-bottom: none;
+    }
+
+    .profile-key {
+      color: rgba(6, 27, 74, 0.48);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .profile-value {
+      color: var(--deep-blue);
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.4px;
+    }
+
+    .profile-value.pending {
+      color: rgba(6, 27, 74, 0.58);
     }
 
     .back-link {
@@ -212,7 +296,11 @@
       letter-spacing: 1px;
     }
 
-    @media (max-width: 900px) {
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 980px) {
       .top-nav {
         position: static;
         flex-direction: column;
@@ -234,8 +322,41 @@
         letter-spacing: -3px;
       }
 
-      .content-card {
+      .profile-card {
+        grid-template-columns: 1fr;
         padding: 28px;
+        gap: 28px;
+      }
+
+      .profile-image-box {
+        min-height: 380px;
+      }
+
+      .profile-row {
+        grid-template-columns: 120px 1fr;
+      }
+
+      .profile-value {
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .profile-card {
+        padding: 22px;
+      }
+
+      .profile-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .profile-key {
+        font-size: 12px;
+      }
+
+      .profile-value {
+        font-size: 19px;
       }
     }
   </style>
@@ -267,17 +388,58 @@
       <div class="page-label">02 / ABOUT</div>
       <h1>ABOUT</h1>
 
-      <div class="content-card">
-        <h2>시엔 소개</h2>
-        <p>
-          시엔에 대한 소개를 정리하는 공간입니다.
-          캐릭터 소개, 활동 방향, 팬네임, 좋아하는 것, 싫어하는 것 등을 이곳에 넣을 수 있습니다.
-        </p>
+      <div class="profile-card">
+        <div class="profile-image-box">
+          <!-- 프로필 이미지가 생기면 아래 주석을 풀고 이미지 파일명을 맞춰줘 -->
+          <!-- <img src="profile.png" alt="SIEN 프로필 이미지" /> -->
 
-        <a href="index.html" class="back-link">← HOME으로 돌아가기</a>
+          <div class="image-placeholder">
+            <strong>PROFILE</strong>
+            <span>IMAGE COMING SOON</span>
+          </div>
+        </div>
+
+        <div class="profile-info">
+          <h2 class="profile-title">PROFILE</h2>
+
+          <div class="profile-list">
+            <div class="profile-row">
+              <div class="profile-key">NAME</div>
+              <div class="profile-value">시엔 / SIEN</div>
+            </div>
+
+            <div class="profile-row">
+              <div class="profile-key">GENDER</div>
+              <div class="profile-value pending">미정</div>
+            </div>
+
+            <div class="profile-row">
+              <div class="profile-key">AGE</div>
+              <div class="profile-value pending">미정</div>
+            </div>
+
+            <div class="profile-row">
+              <div class="profile-key">MAMA</div>
+              <div class="profile-value pending">미정</div>
+            </div>
+
+            <div class="profile-row">
+              <div class="profile-key">PAPA</div>
+              <div class="profile-value pending">미정</div>
+            </div>
+
+            <div class="profile-row">
+              <div class="profile-key">FAN NAME</div>
+              <div class="profile-value pending">미정</div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <a href="index.html" class="back-link">← HOME으로 돌아가기</a>
     </section>
   </main>
+
   <script src="transition.js"></script>
 </body>
 </html>
