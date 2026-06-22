@@ -70,7 +70,7 @@ function getWhaleWakeSvg(direction) {
   return `
     <svg viewBox="0 0 1500 950" preserveAspectRatio="none" aria-hidden="true">
       <defs>
-        <linearGradient id="whaleWakeLeft" x1="100%" y1="0%" x2="0%" y2="0%">
+        <linearGradient id="whaleWakeLeft" x1="100%" y1="0%" x2="0%">
           <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96" />
           <stop offset="10%" stop-color="#d9fbff" stop-opacity="0.98" />
           <stop offset="26%" stop-color="#7fe6ff" stop-opacity="0.98" />
@@ -155,22 +155,22 @@ function createTailSplash(transition) {
 }
 
 function createSeaStreaks(transition, direction) {
-  const streakCount = 7;
+  const streakCount = 6;
 
   for (let i = 0; i < streakCount; i++) {
     const streak = document.createElement("span");
     streak.className = "sea-streak";
 
     const baseAngle = direction === "from-right" ? -28 : 28;
-    const angle = baseAngle + (Math.random() - 0.5) * 24;
+    const angle = baseAngle + (Math.random() - 0.5) * 18;
 
-    const length = 60 + Math.random() * 120;
+    const length = 50 + Math.random() * 100;
     const move =
       direction === "from-right"
-        ? -(120 + Math.random() * 180)
-        : 120 + Math.random() * 180;
+        ? -(90 + Math.random() * 140)
+        : 90 + Math.random() * 140;
 
-    const delay = Math.random() * 0.09;
+    const delay = Math.random() * 0.12;
 
     streak.style.setProperty("--angle", `${angle}deg`);
     streak.style.setProperty("--length", `${length}px`);
@@ -221,5 +221,5 @@ document.addEventListener("click", function (event) {
 
   setTimeout(() => {
     window.location.href = link.href;
-  }, 520);
+  }, 780);
 });
