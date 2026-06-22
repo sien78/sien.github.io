@@ -23,23 +23,23 @@ function createBubbleTransition(x, y) {
   transition.style.setProperty("--x", `${x}px`);
   transition.style.setProperty("--y", `${y}px`);
 
-  const bubbleCount = 24;
+  const bubbleCount = 16;
 
   for (let i = 0; i < bubbleCount; i++) {
     const bubble = document.createElement("span");
     bubble.className = "transition-bubble";
 
     const angle = Math.random() * Math.PI * 2;
-    const distance = Math.random() * 90;
+    const distance = 20 + Math.random() * 70;
 
     const dx = Math.cos(angle) * distance;
     const dy = Math.sin(angle) * distance;
 
-    const floatX = Math.cos(angle) * (120 + Math.random() * 180);
-    const floatY = Math.sin(angle) * (120 + Math.random() * 180) - 80;
+    const floatX = Math.cos(angle) * (80 + Math.random() * 130);
+    const floatY = Math.sin(angle) * (80 + Math.random() * 130) - 40;
 
-    const size = 8 + Math.random() * 30;
-    const delay = Math.random() * 0.1;
+    const size = 7 + Math.random() * 24;
+    const delay = Math.random() * 0.06;
 
     bubble.style.setProperty("--dx", `${dx}px`);
     bubble.style.setProperty("--dy", `${dy}px`);
@@ -74,5 +74,5 @@ document.addEventListener("click", function (event) {
 
   setTimeout(() => {
     window.location.href = link.href;
-  }, 520);
+  }, 320);
 });
