@@ -1,24 +1,461 @@
-body{
-    background:#0b1220;
-    color:white;
-    font-family:sans-serif;
-    text-align:center;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap');
+
+:root {
+    --white: #f8fbff;
+    --sky: #dff5ff;
+    --cyan: #31bfff;
+    --blue: #0065d8;
+    --deep-blue: #061b4a;
+    --navy: #020b24;
+    --text: #071b46;
+    --card: rgba(255, 255, 255, 0.88);
+    --line: rgba(6, 27, 74, 0.16);
 }
 
-nav{
-    padding:20px;
+* {
+    box-sizing: border-box;
 }
 
-nav a{
-    color:white;
-    text-decoration:none;
-    margin:0 15px;
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #eefaff 28%,
+        #9be6ff 62%,
+        #0378df 100%
+    );
+    overflow-x: hidden;
 }
 
-header{
-    padding:100px 20px;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-h1{
-    font-size:60px;
+.site {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 430px;
+}
+
+/* 왼쪽 메인 영역 */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    padding: 42px 64px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), transparent 36%),
+        radial-gradient(circle at 65% 72%, rgba(0,122,255,0.32), transparent 38%);
+    pointer-events: none;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 680px;
+    height: 680px;
+    left: 20%;
+    bottom: -360px;
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 50%;
+    filter: blur(14px);
+    pointer-events: none;
+}
+
+.top-logo {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.small-logo {
+    font-size: 34px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    font-style: italic;
+    color: var(--deep-blue);
+}
+
+.spark {
+    color: var(--cyan);
+    font-size: 24px;
+    margin-top: -10px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    margin-top: 80px;
+}
+
+.hero-content h1 {
+    margin: 0;
+    font-size: clamp(92px, 14vw, 210px);
+    line-height: 0.85;
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: -10px;
+    color: var(--deep-blue);
+}
+
+.sub-label {
+    margin-top: 26px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--blue);
+}
+
+.sub-label span {
+    font-size: 24px;
+}
+
+.sub-label p {
+    margin: 0;
+    font-size: 22px;
+    letter-spacing: 4px;
+    font-weight: 700;
+}
+
+.hero-text {
+    margin: 18px 0 0;
+    font-size: 19px;
+    letter-spacing: 0.5px;
+    color: rgba(7, 27, 70, 0.82);
+}
+
+/* 오른쪽 메뉴 패널 */
+.side-panel {
+    position: relative;
+    min-height: 100vh;
+    padding: 36px 46px;
+    color: white;
+    background:
+        linear-gradient(180deg, rgba(5,30,88,0.96), rgba(1,9,37,0.98));
+    clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding-left: 34px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.22);
+}
+
+.social-icons a {
+    color: rgba(255,255,255,0.88);
+    font-size: 20px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.social-icons a:hover {
+    color: var(--cyan);
+    transform: translateY(-3px);
+}
+
+.main-menu {
+    padding-left: 48px;
+    margin-top: 24px;
+}
+
+.main-menu a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    transition: 0.2s;
+}
+
+.main-menu span {
+    font-size: clamp(34px, 4vw, 54px);
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.92);
+}
+
+.main-menu small {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--cyan);
+}
+
+.main-menu a.active span {
+    color: var(--cyan);
+}
+
+.main-menu a:hover {
+    transform: translateX(8px);
+}
+
+.main-menu a:hover span {
+    color: var(--cyan);
+}
+
+/* 오른쪽 아래 SNS 박스 */
+.join-box {
+    margin-left: 34px;
+    padding: 24px 28px;
+    border: 1px solid rgba(255,255,255,0.32);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.04);
+}
+
+.join-box h3 {
+    margin: 0 0 18px;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.join-icons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.join-icons a {
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 6px;
+    font-size: 20px;
+    font-weight: 800;
+    transition: 0.2s;
+}
+
+.join-icons a:hover {
+    background: rgba(49,191,255,0.18);
+    color: var(--cyan);
+}
+
+/* 하단 카드 */
+.info-cards {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 1.05fr 1.1fr 0.95fr;
+    gap: 16px;
+    margin-top: 80px;
+}
+
+.card {
+    min-height: 210px;
+    padding: 24px 28px;
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.76);
+    border-radius: 8px;
+    box-shadow: 0 18px 40px rgba(3, 50, 112, 0.14);
+    backdrop-filter: blur(10px);
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+}
+
+.card-title span {
+    width: 5px;
+    height: 22px;
+    background: var(--blue);
+}
+
+.card-title h2 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--blue);
+}
+
+.news-list,
+.schedule-list,
+.supporter-list {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+}
+
+.news-list li {
+    display: grid;
+    grid-template-columns: 86px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.news-list strong {
+    color: var(--blue);
+    font-size: 14px;
+}
+
+.news-list p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.schedule-list li {
+    display: grid;
+    grid-template-columns: 126px 1fr 64px;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.date strong {
+    display: block;
+    color: var(--blue);
+    font-size: 21px;
+}
+
+.date small {
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.schedule-list p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.schedule-list em {
+    font-style: normal;
+    text-align: center;
+    padding: 6px 8px;
+    border: 1px solid rgba(0,101,216,0.32);
+    border-radius: 5px;
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.supporter-list li {
+    display: grid;
+    grid-template-columns: 44px 1fr 90px;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+}
+
+.supporter-list strong {
+    color: var(--blue);
+    font-size: 22px;
+}
+
+.supporter-list p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.supporter-list b {
+    color: var(--blue);
+    font-size: 13px;
+    text-align: right;
+}
+
+.view-more {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.thanks {
+    margin: 16px 0 0;
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* 반응형 */
+@media (max-width: 1100px) {
+    .site {
+        grid-template-columns: 1fr;
+    }
+
+    .side-panel {
+        clip-path: none;
+        min-height: auto;
+        padding: 34px;
+    }
+
+    .main-menu {
+        padding-left: 0;
+    }
+
+    .main-menu span {
+        font-size: 36px;
+    }
+
+    .join-box {
+        margin: 30px 0 0;
+    }
+
+    .info-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero {
+        padding: 28px 22px;
+    }
+
+    .hero-content h1 {
+        letter-spacing: -5px;
+    }
+
+    .hero-text {
+        font-size: 15px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .schedule-list li,
+    .supporter-list li,
+    .news-list li {
+        grid-template-columns: 1fr;
+    }
+
+    .side-panel {
+        padding: 28px 22px;
+    }
+
+    .social-icons {
+        padding-left: 0;
+        gap: 20px;
+    }
 }
