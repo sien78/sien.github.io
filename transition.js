@@ -219,7 +219,15 @@ document.addEventListener("click", function (event) {
 
   createWhaleTransition(x, y);
 
+  const href = link.getAttribute("href");
+  const isGoingHome =
+    href === "index.html" ||
+    href === "./index.html" ||
+    href.endsWith("/index.html");
+
+  const delay = isGoingHome ? 980 : 780;
+
   setTimeout(() => {
     window.location.href = link.href;
-  }, 780);
+  }, delay);
 });
