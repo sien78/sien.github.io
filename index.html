@@ -73,61 +73,20 @@
       pointer-events: none;
     }
 
-    .logo {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 34px;
-      font-weight: 900;
-      font-style: italic;
-      letter-spacing: 3px;
-      color: var(--deep-blue);
-    }
-
-    .logo span {
-      color: var(--cyan);
-      font-size: 24px;
-      margin-top: -12px;
-    }
-
     .hero-main {
       position: relative;
       z-index: 2;
-      margin-top: 70px;
+      margin-top: 110px;
     }
 
     .hero-main h1 {
       margin: 0;
-      font-size: clamp(92px, 14vw, 210px);
+      font-size: clamp(110px, 14vw, 210px);
       line-height: 0.85;
       font-weight: 900;
       font-style: italic;
       letter-spacing: -10px;
       color: var(--deep-blue);
-    }
-
-    .label {
-      margin-top: 30px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      color: var(--blue);
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 4px;
-    }
-
-    .label .star {
-      color: var(--cyan);
-      letter-spacing: 0;
-    }
-
-    .hero-main p {
-      margin-top: 18px;
-      font-size: 18px;
-      color: rgba(7, 27, 70, 0.82);
     }
 
     .cards {
@@ -301,7 +260,7 @@
       border-bottom: 1px solid rgba(255,255,255,0.22);
       font-size: 20px;
       font-weight: 800;
-}
+    }
 
     .social a {
       transition: 0.2s;
@@ -332,7 +291,7 @@
       font-style: italic;
       color: rgba(255,255,255,0.92);
       letter-spacing: 1px;
-}
+    }
 
     .menu small {
       color: var(--cyan);
@@ -397,6 +356,10 @@
         padding: 32px 24px;
       }
 
+      .hero-main {
+        margin-top: 60px;
+      }
+
       .hero-main h1 {
         letter-spacing: -5px;
       }
@@ -426,109 +389,95 @@
   <main class="page">
 
     <section class="hero">
-      <div>
-        <header class="logo">
-          SIEN
-          <span>✦</span>
-        </header>
-
-        <div class="hero-main">
-          <h1>SIEN</h1>
-
-          <div class="label">
-            <span class="star">✦</span>
-            <span>VTUBER</span>
-          </div>
-
-          <p>Sailing through the blue, connecting with you.</p>
-        </div>
+      <div class="hero-main">
+        <h1>SIEN</h1>
       </div>
 
       <section class="cards">
         <article class="card">
           <div class="card-title">
-            <h2>LATEST NEWS</h2>
+            <h2>최신 소식</h2>
           </div>
 
           <ul class="news-list">
             <li>
-              <strong>MAY 20</strong>
-              <p>New MV Release Coming Soon</p>
+              <strong>5월 20일</strong>
+              <p>신규 MV 공개 예정</p>
             </li>
             <li>
-              <strong>MAY 12</strong>
-              <p>Voice Pack Update</p>
+              <strong>5월 12일</strong>
+              <p>보이스팩 업데이트</p>
             </li>
             <li>
-              <strong>MAY 01</strong>
-              <p>Membership Renewal Benefits</p>
+              <strong>5월 1일</strong>
+              <p>멤버십 혜택 안내</p>
             </li>
           </ul>
 
-          <a href="#" class="view-more">VIEW ALL ›</a>
+          <a href="#" class="view-more">더보기 ›</a>
         </article>
 
         <article class="card">
           <div class="card-title">
-            <h2>SCHEDULE</h2>
+            <h2>일정표</h2>
           </div>
 
           <ul class="schedule-list">
             <li>
               <div class="date">
                 <strong>05 / 20</strong>
-                <small>TUE 20:00</small>
+                <small>화 20:00</small>
               </div>
-              <p>DEEP TALK</p>
-              <em>TALK</em>
+              <p>토크 방송</p>
+              <em>토크</em>
             </li>
 
             <li>
               <div class="date">
                 <strong>05 / 23</strong>
-                <small>FRI 21:00</small>
+                <small>금 21:00</small>
               </div>
-              <p>GAME STREAM</p>
-              <em>GAME</em>
+              <p>게임 방송</p>
+              <em>게임</em>
             </li>
 
             <li>
               <div class="date">
                 <strong>05 / 25</strong>
-                <small>SUN 19:00</small>
+                <small>일 19:00</small>
               </div>
-              <p>KARAOKE</p>
-              <em>SING</em>
+              <p>노래 방송</p>
+              <em>노래</em>
             </li>
           </ul>
 
-          <a href="#" class="view-more">VIEW ALL ›</a>
+          <a href="#" class="view-more">더보기 ›</a>
         </article>
 
         <article class="card">
           <div class="card-title">
-            <h2>TOP SUPPORTERS</h2>
+            <h2>후원자 랭킹</h2>
           </div>
 
           <ul class="supporter-list">
             <li>
               <strong>01</strong>
-              <p>AbyssWalker</p>
+              <p>고래별</p>
               <b>₩250,000</b>
             </li>
             <li>
               <strong>02</strong>
-              <p>DeepBlue</p>
+              <p>푸른파도</p>
               <b>₩130,000</b>
             </li>
             <li>
               <strong>03</strong>
-              <p>Marine_Star</p>
+              <p>마린스타</p>
               <b>₩72,000</b>
             </li>
           </ul>
 
-          <p class="thanks">THANK YOU FOR YOUR AMAZING SUPPORT!</p>
+          <p class="thanks">응원해주셔서 감사합니다!</p>
         </article>
       </section>
     </section>
@@ -575,7 +524,7 @@
       </div>
 
       <div class="join-box">
-        <h3>JOIN THE ABYSS</h3>
+        <h3>SIEN COMMUNITY</h3>
 
         <div class="join-icons">
           <a href="#">X</a>
