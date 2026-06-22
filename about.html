@@ -6,7 +6,9 @@
 
   <title>ABOUT | SIEN</title>
 
-  <style>
+  
+  <link rel="stylesheet" href="transition.css" />
+<style>
     :root {
       --cyan: #31bfff;
       --blue: #0065d8;
@@ -276,30 +278,6 @@
       </div>
     </section>
   </main>
-
-  <script>
-    const links = document.querySelectorAll("a[href]");
-
-    links.forEach((link) => {
-      const href = link.getAttribute("href");
-
-      if (
-        href &&
-        !href.startsWith("#") &&
-        !href.startsWith("http") &&
-        !href.startsWith("mailto:")
-      ) {
-        link.addEventListener("click", function (event) {
-          event.preventDefault();
-
-          document.body.classList.add("is-leaving");
-
-          setTimeout(() => {
-            window.location.href = href;
-          }, 300);
-        });
-      }
-    });
-  </script>
+  <script src="transition.js"></script>
 </body>
 </html>
