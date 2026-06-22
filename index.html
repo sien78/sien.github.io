@@ -1,195 +1,589 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>SIEN Official Site</title>
+  <title>SIEN Official Site</title>
 
-    <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --white: #f8fbff;
+      --sky: #dff5ff;
+      --cyan: #31bfff;
+      --blue: #0065d8;
+      --deep-blue: #061b4a;
+      --navy: #020b24;
+      --text: #071b46;
+      --card: rgba(255, 255, 255, 0.9);
+      --line: rgba(6, 27, 74, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+    }
+
+    body {
+      background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #eefaff 32%,
+        #8ee4ff 68%,
+        #0074d9 100%
+      );
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 28vw);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      padding: 42px 56px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(255,255,255,0.9), transparent 34%),
+        radial-gradient(circle at 70% 75%, rgba(0,120,255,0.35), transparent 40%);
+      pointer-events: none;
+    }
+
+    .logo {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 34px;
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: 3px;
+      color: var(--deep-blue);
+    }
+
+    .logo span {
+      color: var(--cyan);
+      font-size: 24px;
+      margin-top: -12px;
+    }
+
+    .hero-main {
+      position: relative;
+      z-index: 2;
+      margin-top: 70px;
+    }
+
+    .hero-main h1 {
+      margin: 0;
+      font-size: clamp(92px, 14vw, 210px);
+      line-height: 0.85;
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: -10px;
+      color: var(--deep-blue);
+    }
+
+    .label {
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--blue);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 4px;
+    }
+
+    .label .star {
+      color: var(--cyan);
+      letter-spacing: 0;
+    }
+
+    .hero-main p {
+      margin-top: 18px;
+      font-size: 18px;
+      color: rgba(7, 27, 70, 0.82);
+    }
+
+    .cards {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.05fr 1.1fr 0.95fr;
+      gap: 16px;
+      margin-top: 70px;
+    }
+
+    .card {
+      min-height: 200px;
+      padding: 22px 24px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.8);
+      border-radius: 8px;
+      box-shadow: 0 18px 40px rgba(3, 50, 112, 0.14);
+      backdrop-filter: blur(10px);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .card-title::before {
+      content: "";
+      width: 5px;
+      height: 22px;
+      background: var(--blue);
+      display: block;
+    }
+
+    .card-title h2 {
+      margin: 0;
+      font-size: 19px;
+      color: var(--blue);
+    }
+
+    .news-list,
+    .schedule-list,
+    .supporter-list {
+      list-style: none;
+      margin: 12px 0 0;
+      padding: 0;
+    }
+
+    .news-list li {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .news-list strong {
+      color: var(--blue);
+    }
+
+    .news-list p {
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .schedule-list li {
+      display: grid;
+      grid-template-columns: 112px 1fr 58px;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .date strong {
+      display: block;
+      color: var(--blue);
+      font-size: 20px;
+    }
+
+    .date small {
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .schedule-list p {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .schedule-list em {
+      font-style: normal;
+      text-align: center;
+      padding: 6px 8px;
+      border: 1px solid rgba(0,101,216,0.32);
+      border-radius: 5px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .supporter-list li {
+      display: grid;
+      grid-template-columns: 40px 1fr 86px;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+    }
+
+    .supporter-list strong {
+      color: var(--blue);
+      font-size: 21px;
+    }
+
+    .supporter-list p {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .supporter-list b {
+      color: var(--blue);
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .view-more {
+      display: inline-block;
+      margin-top: 14px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .thanks {
+      margin: 16px 0 0;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .side-panel {
+      position: relative;
+      min-height: 100vh;
+      padding: 36px 38px 36px 64px;
+      color: white;
+      background: linear-gradient(
+        180deg,
+        rgba(5, 30, 88, 0.98),
+        rgba(1, 9, 37, 0.98)
+      );
+      clip-path: polygon(13% 0, 100% 0, 100% 100%, 0 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.22);
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .social a {
+      transition: 0.2s;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .social a:hover {
+      color: var(--cyan);
+      transform: translateY(-3px);
+    }
+
+    .menu {
+      margin-top: 24px;
+    }
+
+    .menu a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      transition: 0.2s;
+    }
+
+    .menu span {
+      font-size: clamp(30px, 3.3vw, 52px);
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .menu small {
+      color: var(--cyan);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .menu a.active span {
+      color: var(--cyan);
+    }
+
+    .menu a:hover {
+      transform: translateX(8px);
+    }
+
+    .menu a:hover span {
+      color: var(--cyan);
+    }
+
+    .join-box {
+      padding: 22px 24px;
+      border: 1px solid rgba(255,255,255,0.32);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .join-box h3 {
+      margin: 0 0 18px;
+      font-size: 21px;
+      letter-spacing: 1px;
+    }
+
+    .join-icons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .join-icons a {
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 6px;
+      font-size: 20px;
+      font-weight: 800;
+      transition: 0.2s;
+    }
+
+    .join-icons a:hover {
+      background: rgba(49,191,255,0.18);
+      color: var(--cyan);
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 32px 24px;
+      }
+
+      .hero-main h1 {
+        letter-spacing: -5px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .side-panel {
+        min-height: auto;
+        clip-path: none;
+        padding: 32px 24px;
+      }
+
+      .menu span {
+        font-size: 36px;
+      }
+
+      .join-box {
+        margin-top: 30px;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <main class="page">
 
-    <main class="site">
+    <section class="hero">
+      <div>
+        <header class="logo">
+          SIEN
+          <span>✦</span>
+        </header>
 
-        <!-- 왼쪽 메인 영역 -->
-        <section class="hero">
+        <div class="hero-main">
+          <h1>SIEN</h1>
 
-            <header class="top-logo">
-                <div class="small-logo">SIEN</div>
-                <div class="spark">✦</div>
-            </header>
+          <div class="label">
+            <span class="star">✦</span>
+            <span>VTUBER</span>
+          </div>
 
-            <div class="hero-content">
-                <h1>SIEN</h1>
+          <p>Sailing through the blue, connecting with you.</p>
+        </div>
+      </div>
 
-                <div class="sub-label">
-                    <span>✦</span>
-                    <p>VTUBER</p>
-                </div>
+      <section class="cards">
+        <article class="card">
+          <div class="card-title">
+            <h2>LATEST NEWS</h2>
+          </div>
 
-                <p class="hero-text">
-                    Sailing through the blue, connecting with you.
-                </p>
-            </div>
+          <ul class="news-list">
+            <li>
+              <strong>MAY 20</strong>
+              <p>New MV Release Coming Soon</p>
+            </li>
+            <li>
+              <strong>MAY 12</strong>
+              <p>Voice Pack Update</p>
+            </li>
+            <li>
+              <strong>MAY 01</strong>
+              <p>Membership Renewal Benefits</p>
+            </li>
+          </ul>
 
-            <!-- 하단 카드 영역 -->
-            <section class="info-cards">
+          <a href="#" class="view-more">VIEW ALL ›</a>
+        </article>
 
-                <article class="card">
-                    <div class="card-title">
-                        <span></span>
-                        <h2>LATEST NEWS</h2>
-                    </div>
+        <article class="card">
+          <div class="card-title">
+            <h2>SCHEDULE</h2>
+          </div>
 
-                    <ul class="news-list">
-                        <li>
-                            <strong>MAY 20</strong>
-                            <p>New MV Release Coming Soon</p>
-                        </li>
-                        <li>
-                            <strong>MAY 12</strong>
-                            <p>Voice Pack Update</p>
-                        </li>
-                        <li>
-                            <strong>MAY 01</strong>
-                            <p>Membership Renewal Benefits</p>
-                        </li>
-                    </ul>
+          <ul class="schedule-list">
+            <li>
+              <div class="date">
+                <strong>05 / 20</strong>
+                <small>TUE 20:00</small>
+              </div>
+              <p>DEEP TALK</p>
+              <em>TALK</em>
+            </li>
 
-                    <a href="#" class="view-more">VIEW ALL ›</a>
-                </article>
+            <li>
+              <div class="date">
+                <strong>05 / 23</strong>
+                <small>FRI 21:00</small>
+              </div>
+              <p>GAME STREAM</p>
+              <em>GAME</em>
+            </li>
 
-                <article class="card">
-                    <div class="card-title">
-                        <span></span>
-                        <h2>SCHEDULE</h2>
-                    </div>
+            <li>
+              <div class="date">
+                <strong>05 / 25</strong>
+                <small>SUN 19:00</small>
+              </div>
+              <p>KARAOKE</p>
+              <em>SING</em>
+            </li>
+          </ul>
 
-                    <ul class="schedule-list">
-                        <li>
-                            <div class="date">
-                                <strong>05 / 20</strong>
-                                <small>TUE 20:00</small>
-                            </div>
-                            <p>DEEP TALK</p>
-                            <em>TALK</em>
-                        </li>
+          <a href="#" class="view-more">VIEW ALL ›</a>
+        </article>
 
-                        <li>
-                            <div class="date">
-                                <strong>05 / 23</strong>
-                                <small>FRI 21:00</small>
-                            </div>
-                            <p>GAME STREAM</p>
-                            <em>GAME</em>
-                        </li>
+        <article class="card">
+          <div class="card-title">
+            <h2>TOP SUPPORTERS</h2>
+          </div>
 
-                        <li>
-                            <div class="date">
-                                <strong>05 / 25</strong>
-                                <small>SUN 19:00</small>
-                            </div>
-                            <p>KARAOKE</p>
-                            <em>SING</em>
-                        </li>
-                    </ul>
+          <ul class="supporter-list">
+            <li>
+              <strong>01</strong>
+              <p>AbyssWalker</p>
+              <b>₩250,000</b>
+            </li>
+            <li>
+              <strong>02</strong>
+              <p>DeepBlue</p>
+              <b>₩130,000</b>
+            </li>
+            <li>
+              <strong>03</strong>
+              <p>Marine_Star</p>
+              <b>₩72,000</b>
+            </li>
+          </ul>
 
-                    <a href="#" class="view-more">VIEW ALL ›</a>
-                </article>
+          <p class="thanks">THANK YOU FOR YOUR AMAZING SUPPORT!</p>
+        </article>
+      </section>
+    </section>
 
-                <article class="card">
-                    <div class="card-title">
-                        <span></span>
-                        <h2>TOP SUPPORTERS</h2>
-                    </div>
+    <aside class="side-panel">
+      <div>
+        <div class="social">
+          <a href="#">X</a>
+          <a href="#">▶</a>
+          <a href="#">▣</a>
+          <a href="#">♪</a>
+        </div>
 
-                    <ul class="supporter-list">
-                        <li>
-                            <strong>01</strong>
-                            <p>AbyssWalker</p>
-                            <b>₩250,000</b>
-                        </li>
-                        <li>
-                            <strong>02</strong>
-                            <p>DeepBlue</p>
-                            <b>₩130,000</b>
-                        </li>
-                        <li>
-                            <strong>03</strong>
-                            <p>Marine_Star</p>
-                            <b>₩72,000</b>
-                        </li>
-                    </ul>
+        <nav class="menu">
+          <a href="#" class="active">
+            <span>HOME</span>
+            <small>01</small>
+          </a>
+          <a href="#">
+            <span>ABOUT</span>
+            <small>02</small>
+          </a>
+          <a href="#">
+            <span>LORE</span>
+            <small>03</small>
+          </a>
+          <a href="#">
+            <span>GALLERY</span>
+            <small>04</small>
+          </a>
+          <a href="#">
+            <span>FANART</span>
+            <small>05</small>
+          </a>
+          <a href="#">
+            <span>RANKING</span>
+            <small>06</small>
+          </a>
+          <a href="#">
+            <span>SUPPORT</span>
+            <small>07</small>
+          </a>
+        </nav>
+      </div>
 
-                    <p class="thanks">THANK YOU FOR YOUR AMAZING SUPPORT!</p>
-                </article>
+      <div class="join-box">
+        <h3>JOIN THE ABYSS</h3>
 
-            </section>
-        </section>
+        <div class="join-icons">
+          <a href="#">X</a>
+          <a href="#">▶</a>
+          <a href="#">▣</a>
+          <a href="#">♪</a>
+        </div>
+      </div>
+    </aside>
 
-        <!-- 오른쪽 메뉴 영역 -->
-        <aside class="side-panel">
-
-            <div class="social-icons">
-                <a href="#">X</a>
-                <a href="#">▶</a>
-                <a href="#">▣</a>
-                <a href="#">♪</a>
-            </div>
-
-            <nav class="main-menu">
-                <a href="#" class="active">
-                    <span>HOME</span>
-                    <small>01</small>
-                </a>
-
-                <a href="#">
-                    <span>ABOUT</span>
-                    <small>02</small>
-                </a>
-
-                <a href="#">
-                    <span>LORE</span>
-                    <small>03</small>
-                </a>
-
-                <a href="#">
-                    <span>GALLERY</span>
-                    <small>04</small>
-                </a>
-
-                <a href="#">
-                    <span>FANART</span>
-                    <small>05</small>
-                </a>
-
-                <a href="#">
-                    <span>RANKING</span>
-                    <small>06</small>
-                </a>
-
-                <a href="#">
-                    <span>SUPPORT</span>
-                    <small>07</small>
-                </a>
-            </nav>
-
-            <div class="join-box">
-                <h3>JOIN THE ABYSS</h3>
-
-                <div class="join-icons">
-                    <a href="#">X</a>
-                    <a href="#">▶</a>
-                    <a href="#">▣</a>
-                    <a href="#">♪</a>
-                </div>
-            </div>
-
-        </aside>
-
-    </main>
-
-    <script src="main.js"></script>
+  </main>
 </body>
 </html>
