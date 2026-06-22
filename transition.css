@@ -5,6 +5,7 @@
   z-index: 9999;
   pointer-events: none;
   overflow: hidden;
+
   --x: 50vw;
   --y: 50vh;
 }
@@ -14,49 +15,64 @@
   position: absolute;
   left: var(--x);
   top: var(--y);
+
   width: 160vmax;
   height: 160vmax;
+
   border-radius: 50%;
+
   background:
-    radial-gradient(circle,
+    radial-gradient(
+      circle,
       rgba(255, 255, 255, 0.98) 0%,
       rgba(210, 250, 255, 0.98) 13%,
       rgba(49, 191, 255, 0.96) 34%,
       rgba(0, 101, 216, 0.98) 62%,
-      rgba(2, 11, 36, 1) 100%);
+      rgba(2, 11, 36, 1) 100%
+    );
+
   transform: translate(-50%, -50%) scale(0);
-  animation: bubbleWave 0.78s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+  animation: bubbleWave 0.52s cubic-bezier(0.7, 0, 0.2, 1) forwards;
 }
 
 .bubble-transition::after {
   content: "";
   position: absolute;
   inset: 0;
+
   background:
     radial-gradient(circle at var(--x) var(--y), rgba(255,255,255,0.55), transparent 18%),
     linear-gradient(135deg, rgba(255,255,255,0.18), rgba(49,191,255,0.15));
+
   opacity: 0;
-  animation: bubbleFlash 0.78s ease forwards;
+  animation: bubbleFlash 0.52s ease forwards;
 }
 
 .transition-bubble {
   position: absolute;
   left: calc(var(--x) + var(--dx));
   top: calc(var(--y) + var(--dy));
+
   width: var(--size);
   height: var(--size);
+
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.85);
+
   background:
-    radial-gradient(circle at 30% 30%,
+    radial-gradient(
+      circle at 30% 30%,
       rgba(255,255,255,0.95),
       rgba(160,235,255,0.45) 38%,
-      rgba(49,191,255,0.1) 72%);
+      rgba(49,191,255,0.1) 72%
+    );
+
   box-shadow:
     0 0 14px rgba(255,255,255,0.55),
     0 0 22px rgba(49,191,255,0.38);
+
   opacity: 0;
-  animation: bubbleFloat 0.76s ease-out forwards;
+  animation: bubbleFloat 0.5s ease-out forwards;
   animation-delay: var(--delay);
 }
 
@@ -65,10 +81,12 @@
     transform: translate(-50%, -50%) scale(0);
     filter: blur(0px);
   }
+
   65% {
     transform: translate(-50%, -50%) scale(0.9);
     filter: blur(0.5px);
   }
+
   100% {
     transform: translate(-50%, -50%) scale(1);
     filter: blur(0px);
@@ -76,9 +94,17 @@
 }
 
 @keyframes bubbleFlash {
-  0% { opacity: 0; }
-  25% { opacity: 1; }
-  100% { opacity: 0.35; }
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.35;
+  }
 }
 
 @keyframes bubbleFloat {
@@ -86,9 +112,15 @@
     opacity: 0;
     transform: translate(0, 0) scale(0.4);
   }
-  20% { opacity: 1; }
+
+  20% {
+    opacity: 1;
+  }
+
   100% {
     opacity: 0;
-    transform: translate(var(--float-x), var(--float-y)) scale(1.25);
+    transform:
+      translate(var(--float-x), var(--float-y))
+      scale(1.25);
   }
 }
