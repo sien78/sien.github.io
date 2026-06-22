@@ -12,139 +12,159 @@ function isInternalPageLink(link) {
   if (link.hasAttribute("download")) return false;
 
   const url = new URL(href, window.location.href);
-
   return url.origin === window.location.origin;
 }
 
-function getWaveSvg(direction) {
+function getDiagonalWaveSvg(direction) {
   if (direction === "from-right") {
     return `
-      <svg viewBox="0 0 1400 800" preserveAspectRatio="none" aria-hidden="true">
+      <svg viewBox="0 0 1400 900" preserveAspectRatio="none" aria-hidden="true">
         <defs>
-          <linearGradient id="waveGradientRight" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
-            <stop offset="16%" stop-color="#bff5ff" stop-opacity="0.98" />
-            <stop offset="44%" stop-color="#31bfff" stop-opacity="0.98" />
+          <linearGradient id="sienWaveRight" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.94" />
+            <stop offset="14%" stop-color="#bdf4ff" stop-opacity="0.98" />
+            <stop offset="42%" stop-color="#31bfff" stop-opacity="0.98" />
             <stop offset="72%" stop-color="#0065d8" stop-opacity="0.98" />
             <stop offset="100%" stop-color="#020b24" stop-opacity="1" />
           </linearGradient>
         </defs>
 
         <path
-          d="M1400 0 H470
-             C330 70 525 165 360 275
-             C185 390 555 505 330 650
-             C255 700 220 755 245 800
+          d="M1400 0
+             H430
+             C260 95 540 210 360 330
+             C130 485 585 610 330 760
+             C250 810 215 860 230 900
              H1400 Z"
-          fill="url(#waveGradientRight)"
+          fill="url(#sienWaveRight)"
         />
 
         <path
-          class="wave-foam"
-          d="M470 0
-             C330 70 525 165 360 275
-             C185 390 555 505 330 650
-             C255 700 220 755 245 800"
+          class="wave-highlight"
+          d="M430 0
+             C260 95 540 210 360 330
+             C130 485 585 610 330 760
+             C250 810 215 860 230 900"
         />
 
         <path
-          class="wave-foam soft"
-          d="M570 0
-             C435 88 610 174 455 285
-             C302 395 655 520 440 665
-             C370 716 340 762 365 800"
+          class="wave-highlight soft"
+          d="M545 0
+             C390 105 650 230 480 350
+             C295 485 710 625 470 770
+             C400 815 370 862 385 900"
         />
       </svg>
     `;
   }
 
   return `
-    <svg viewBox="0 0 1400 800" preserveAspectRatio="none" aria-hidden="true">
+    <svg viewBox="0 0 1400 900" preserveAspectRatio="none" aria-hidden="true">
       <defs>
-        <linearGradient id="waveGradientLeft" x1="100%" y1="0%" x2="0%" y2="0%">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
-          <stop offset="16%" stop-color="#bff5ff" stop-opacity="0.98" />
-          <stop offset="44%" stop-color="#31bfff" stop-opacity="0.98" />
+        <linearGradient id="sienWaveLeft" x1="100%" y1="0%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.94" />
+          <stop offset="14%" stop-color="#bdf4ff" stop-opacity="0.98" />
+          <stop offset="42%" stop-color="#31bfff" stop-opacity="0.98" />
           <stop offset="72%" stop-color="#0065d8" stop-opacity="0.98" />
           <stop offset="100%" stop-color="#020b24" stop-opacity="1" />
         </linearGradient>
       </defs>
 
       <path
-        d="M0 0 H930
-           C1070 70 875 165 1040 275
-           C1215 390 845 505 1070 650
-           C1145 700 1180 755 1155 800
+        d="M0 0
+           H970
+           C1140 95 860 210 1040 330
+           C1270 485 815 610 1070 760
+           C1150 810 1185 860 1170 900
            H0 Z"
-        fill="url(#waveGradientLeft)"
+        fill="url(#sienWaveLeft)"
       />
 
       <path
-        class="wave-foam"
-        d="M930 0
-           C1070 70 875 165 1040 275
-           C1215 390 845 505 1070 650
-           C1145 700 1180 755 1155 800"
+        class="wave-highlight"
+        d="M970 0
+           C1140 95 860 210 1040 330
+           C1270 485 815 610 1070 760
+           C1150 810 1185 860 1170 900"
       />
 
       <path
-        class="wave-foam soft"
-        d="M830 0
-           C965 88 790 174 945 285
-           C1098 395 745 520 960 665
-           C1030 716 1060 762 1035 800"
+        class="wave-highlight soft"
+        d="M855 0
+           C1010 105 750 230 920 350
+           C1105 485 690 625 930 770
+           C1000 815 1030 862 1015 900"
       />
     </svg>
   `;
 }
 
-function createWaveTransition(x, y) {
+function createFoamSplash(x, y, transition) {
+  const foam = document.createElement("div");
+  foam.className = "foam-splash";
+
+  foam.innerHTML = `
+    <svg viewBox="0 0 240 120" aria-hidden="true">
+      <path
+        class="foam-line"
+        d="M10 70
+           C45 25 85 95 122 50
+           C155 12 185 80 230 35"
+      />
+      <path
+        class="foam-line thin"
+        d="M18 92
+           C58 62 82 118 126 78
+           C160 48 190 102 224 70"
+      />
+    </svg>
+  `;
+
+  transition.appendChild(foam);
+}
+
+function createDroplets(x, y, transition) {
+  const dropletCount = 10;
+
+  for (let i = 0; i < dropletCount; i++) {
+    const droplet = document.createElement("span");
+    droplet.className = "sea-droplet";
+
+    const angle = -Math.PI / 4 + (Math.random() - 0.5) * Math.PI;
+    const distance = 50 + Math.random() * 130;
+
+    const moveX = Math.cos(angle) * distance;
+    const moveY = Math.sin(angle) * distance;
+
+    const size = 5 + Math.random() * 15;
+    const delay = Math.random() * 0.08;
+
+    droplet.style.setProperty("--size", `${size}px`);
+    droplet.style.setProperty("--move-x", `${moveX}px`);
+    droplet.style.setProperty("--move-y", `${moveY}px`);
+    droplet.style.setProperty("--delay", `${delay}s`);
+
+    transition.appendChild(droplet);
+  }
+}
+
+function createSeaTransition(x, y) {
   const direction = x > window.innerWidth / 2 ? "from-right" : "from-left";
 
   const transition = document.createElement("div");
-  transition.className = `wave-transition ${direction}`;
+  transition.className = `sea-transition ${direction}`;
 
   transition.style.setProperty("--x", `${x}px`);
   transition.style.setProperty("--y", `${y}px`);
 
-  const ripple1 = document.createElement("span");
-  ripple1.className = "wave-ripple";
+  createFoamSplash(x, y, transition);
+  createDroplets(x, y, transition);
 
-  const ripple2 = document.createElement("span");
-  ripple2.className = "wave-ripple second";
+  const wave = document.createElement("div");
+  wave.className = "diagonal-wave";
+  wave.innerHTML = getDiagonalWaveSvg(direction);
 
-  const ripple3 = document.createElement("span");
-  ripple3.className = "wave-ripple third";
-
-  transition.appendChild(ripple1);
-  transition.appendChild(ripple2);
-  transition.appendChild(ripple3);
-
-  const oceanWave = document.createElement("div");
-  oceanWave.className = "ocean-wave";
-  oceanWave.innerHTML = getWaveSvg(direction);
-
-  transition.appendChild(oceanWave);
-
-  const dropletCount = 12;
-
-  for (let i = 0; i < dropletCount; i++) {
-    const droplet = document.createElement("span");
-    droplet.className = "wave-droplet";
-
-    const top = 8 + Math.random() * 84;
-    const size = 6 + Math.random() * 20;
-    const delay = Math.random() * 0.12;
-    const floatY = -60 + Math.random() * 120;
-
-    droplet.style.setProperty("--top", `${top}%`);
-    droplet.style.setProperty("--size", `${size}px`);
-    droplet.style.setProperty("--delay", `${delay}s`);
-    droplet.style.setProperty("--float-y", `${floatY}px`);
-
-    transition.appendChild(droplet);
-  }
-
+  transition.appendChild(wave);
   document.body.appendChild(transition);
 }
 
@@ -164,9 +184,9 @@ document.addEventListener("click", function (event) {
   const x = rect.left + rect.width / 2;
   const y = rect.top + rect.height / 2;
 
-  createWaveTransition(x, y);
+  createSeaTransition(x, y);
 
   setTimeout(() => {
     window.location.href = link.href;
-  }, 420);
+  }, 460);
 });
